@@ -1,0 +1,7 @@
+"*.pyc" 
+"__pycache__/" 
+".venv/" 
+"poetry.lock"
+".env"
+".csv"
+".mypy_cache"
