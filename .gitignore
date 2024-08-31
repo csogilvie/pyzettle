@@ -5,5 +5,4 @@
 ".env"
 ".csv"
 ".mypy_cache"
-"python.exe"
 .venv/Scripts/python.exe
