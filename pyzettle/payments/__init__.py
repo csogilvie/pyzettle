@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 import os
 import pandas as pd
 from pyzettle.payments import drop_columns
+from datetime import datetime
 
 API_URL = "https://purchase.izettle.com/purchases/v2"
 CASH_CARD_MAPPING = {
@@ -20,11 +21,16 @@ class GetPayments(Authenticate):
         
         super().__init__(client_id, api_key)
         
-    def fetch_purchases(self):
+    def fetch_purchases(self,start:datetime=None, end:datetime=None):
         
         headers = {"Authorization": f"Bearer {self.access_token}"}
         
         params = {"descending": "true"}
+
+        if not start is None:
+            params['startDate'] = start.strftime("%Y-%m-%dT%H:%M:%S%z")
+        if not end is None:
+            params['endDate'] = end.strftime("%Y-%m-%dT%H:%M:%S%z")
 
         while True:
             response = requests.get(self.api_url, headers=headers, params=params)
@@ -99,7 +105,10 @@ class GetPayments(Authenticate):
         "name" : "product",
         }
         
-        instance = self._drop_columns("initial")._format_payment_col()._format_products_col()._drop_columns("final")
+        instance = self._drop_columns("initial")
+        instance = instance._format_payment_col()
+        instance = instance._format_products_col()
+        instance = instance._drop_columns("final")
         data = instance.data
         data['name'] = data['name'].replace('', "unknown")
         
