@@ -78,7 +78,6 @@ class GetPayments(Authenticate):
         
         if 'products' in self.data.columns:
             products = self.data.explode('products')
-            print(f"Payment columns {list(products.columns)}")
             
             products_norm = pd.json_normalize(products['products'])
             products_norm = products_norm.drop(columns=drop_columns.PRODUCTS)
