@@ -64,9 +64,9 @@ class GetPayments(Authenticate):
         if 'payments' in self.data.columns:
             payments = self.data.explode('payments')
             payments = pd.json_normalize(payments['payments'])
-            payments = payments.drop(columns=drop_columns.PAYMENTS)
+            payments = payments.drop(columns=drop_columns.PAYMENTS, errors='ignore')
             
-            self.data = self.data.drop(columns=['payments']).reset_index(drop=True).join(payments.reset_index(drop=True))        
+            self.data = self.data.drop(columns=['payments'], errors='ignore').reset_index(drop=True).join(payments.reset_index(drop=True))        
             self.data['type'] = self.data['type'].replace(CASH_CARD_MAPPING)
             
             return self
@@ -80,9 +80,9 @@ class GetPayments(Authenticate):
             products = self.data.explode('products')
             
             products_norm = pd.json_normalize(products['products'])
-            products_norm = products_norm.drop(columns=drop_columns.PRODUCTS)
+            products_norm = products_norm.drop(columns=drop_columns.PRODUCTS, errors='ignore')
             
-            products = products.drop(columns=['products']).reset_index(drop=True)
+            products = products.drop(columns=['products'], errors='ignore').reset_index(drop=True)
             self.data = products.join(products_norm.reset_index(drop=True))
             return self
         
