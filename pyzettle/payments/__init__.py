@@ -43,6 +43,7 @@ class GetPayments(Authenticate):
             # Update params with the lastPurchaseHash for the next request
             params['lastPurchaseHash'] = last_purchase_hash
         
+        self.data['timestamp'] = pd.to_datetime(self.data['timestamp'])
         return self
 
 
