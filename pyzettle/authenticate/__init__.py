@@ -1,21 +1,19 @@
 import requests
 
-
 AUTH_API_URL = "https://oauth.zettle.com/token"
 
 
 class Authenticate:
-    
+
     def __init__(self, client_id: str, api_key: str):
         self.client_id = client_id
         self.api_key = api_key
         self.auth_api_url = AUTH_API_URL
-        
+
         self.full_token = self._get_token()
         self.access_token = self.full_token['access_token']
         self.token_expires_in = self.full_token['expires_in']
-        
-        
+
     def _get_token(self):
         # Create the payload for the POST request
         payload = {

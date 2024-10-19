@@ -56,7 +56,6 @@ PAYMENTS = [
     "details.giftcardUuid",
 ]
 
-
 PRODUCTS = [
     "vatPercentage",
     "taxRates",
@@ -98,6 +97,3 @@ FINAL = [
     "sku",
     "barcode",
 ]
-
-
-
