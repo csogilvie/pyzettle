@@ -103,6 +103,7 @@ class GetPayments(Authenticate):
         "type" : "payment_type",
         "unitPrice" : "unit_price",
         "name" : "product",
+            "userDisplayName": "user_display_name"
         }
         
         instance = self._drop_columns("initial")

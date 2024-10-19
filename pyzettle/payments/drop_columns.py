@@ -7,7 +7,6 @@ INITIAL = [
     "currency",
     "gpsCoordinates",
     "globalPurchaseNumber",
-    "userDisplayName",
     "userId",
     "organizationId",
     "references",
